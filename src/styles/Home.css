@@ -1,0 +1,205 @@
+/* styles.css */
+
+body,
+html {
+  /* margin: 0;
+  padding: 0; */
+  font-family: Arial, sans-serif;
+  width: 1000px;
+  margin: 0 auto;
+  min-height: 100%;
+}
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+  background: aliceblue;
+  text-align: center;
+  padding-top: 30px;
+}
+.header span {
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  min-height: 100%;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a:hover {
+  text-decoration: underline;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  min-height: 100vh;
+}
+.main-content {
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  text-align: justify;
+}
+.liste-des-taches-div {
+  margin: 30px auto 10px auto;
+}
+.liste-des-taches-title {
+  font-size: 30px;
+}
+
+/* ----------------Modal------------------- */
+#supprimer-task {
+  position: fixed;
+  top: 50%;
+  left: 57%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  width: 90%;
+  height: 300px;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+#popup {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  border: 2px solid #f20707;
+  text-align: center;
+}
+#validate-clear-btn {
+  display: flex;
+}
+
+#buttonannuler,
+#buttonsvalider {
+  /* background-color: #ffffff; */
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+  font-family: Noto Sans, sans-serif;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+}
+
+#buttonannuler {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7a5cfa;
+  background-color: #ececff;
+}
+
+#buttonannuler:hover {
+  color: white;
+  background: #383dbf;
+
+  /* background-color: #ececff; */
+}
+
+#buttonsvalider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7a5cfa;
+  background-color: #ececff;
+  /* background-color: #484edf;
+  color: #ffffff; */
+}
+
+#buttonsvalider:hover {
+  color: white;
+  background: #383dbf;
+  /* background-color: #383dbf; */
+}
+
+#title {
+  color: #091133;
+  font-size: 24px;
+  font-family: Roboto, sans-serif;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+#text,
+#text2 {
+  text-align: center;
+  font-size: 16px;
+  font-family: Noto Sans, sans-serif;
+}
+
+#clear {
+  /* color: #7a5cfa; */
+  color: red;
+}
+
+#go {
+  /* color: #ffffff; */
+  color: green;
+}
+.modalDeleteHidden {
+  visibility: hidden;
+}
+
+.modalDeleteVisible {
+  visibility: visible;
+}
+.close {
+  margin-top: 10px;
+  background: rgb(227, 227, 227);
+  border-color: white;
+  height: 40px;
+  width: 27px;
+  color: #0a0a0a;
+  float: right;
+  position: fixed;
+  top: 6%;
+  right: 5%;
+  padding: 4px;
+  font-size: 28px;
+  font-weight: bold;
+}
+/* #supprimer-task button {
+  
+} */
+
+.close:hover,
+.close:focus {
+  color: black;
+  background: white;
+  text-decoration: none;
+  cursor: pointer;
+  /* border-color: white; */
+}
