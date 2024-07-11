@@ -8,7 +8,7 @@ declare global {
 export function initBrevoTracker() {
   window.sib = {
     equeue: [],
-    client_key: "45x9ltm5vhwzp7wn8w7ci4r8",
+    client_key: "u55r8qbceiyoyz9cdvae33h4",
   };
 
   window.sendinblue = {};
