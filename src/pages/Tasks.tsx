@@ -1,55 +1,43 @@
 import "../styles/Home.css";
-import { useState, useEffect } from "react";
-import {
-  fetchTasks,
-  addTask,
-  deleteTask,
-  updateTaskDone,
-} from "../services/fetchTasks";
+import { useState, useEffect, useCallback } from "react";
+import { fetchTasks, addTask, deleteTask, updateTaskDone, editTask } from "../services/fetchTasks";
 import TaskForm from "../components/TaskFormObject";
 import ITask from "../components/interfaces/ITask";
 import TaskRow from "../components/TaskRow";
-
-// interface Task {
-//   done: boolean;
-//   title: string;
-// }
-
-// interface TaskProps {
-//   tasks: Task;
-//   description: string;
-// }
 
 const Tasks: React.FC<any> = () => {
   const [listTasks, setListTasks] = useState<ITask[]>([]);
   const [modalDeleteStyle, setModalDeleteStyle] = useState("modalDeleteHidden");
   const [idTaskToDelete, setIdTaskToDelete] = useState("");
+  const [taskToPass, setTaskToPass] = useState<ITask>({ title: "", date: "" });
+  const [isModified, setIsModified] = useState(false);
+
+  useState<ITask>({ title: "", date: "" });
 
   useEffect(() => {
-    try {
-      getAllTasks();
-    } catch (error) {
-      console.log(error);
-    }
+    getAllTasks();
   }, []);
 
-  const getAllTasks = async () => {
-    try {
-      let list = await fetchTasks();
-      setListTasks(list);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const getAllTasks = useCallback(async () => {
+    setListTasks([]);
+    let list = await fetchTasks();
+    setListTasks([...list]);
+  }, []);
 
-  const addTaskInComponentTasks = async (taskToAdd: ITask) => {
-    try {
+  const addTaskInComponentTasks = async (taskToAdd: ITask, isModifiedValue: boolean) => {
+    if (isModifiedValue) {
+      //modifier une tâche
+      let task = await editTask(taskToAdd);
+      console.log(task);
+      setIsModified(false);
+    } else {
+      //ajouter une tâche
       let task = await addTask(taskToAdd);
       console.log(task);
-      await getAllTasks();
-    } catch (error) {
-      console.log(error);
+      setIsModified(false);
     }
+    //afficher la liste
+    await getAllTasks();
   };
   const deleteTaskInComponentTasks = (idRowTask: string) => {
     try {
@@ -88,6 +76,11 @@ const Tasks: React.FC<any> = () => {
       console.log(error);
     }
   };
+
+  const updateTaskRow = (isModified: boolean, taskRow: ITask) => {
+    setIsModified(isModified);
+    setTaskToPass(taskRow);
+  };
   // const handleCheckTask = (id: string) => {
   //   const updatedTasks = listTasks.map((task) => {
   //     if (task._id === id) {
@@ -102,8 +95,10 @@ const Tasks: React.FC<any> = () => {
     <main className="container">
       <div className="main-content">
         <TaskForm
-          addTaskInComponentTasks={(taskToAdd: ITask) =>
-            addTaskInComponentTasks(taskToAdd)
+          task={taskToPass}
+          isModified={isModified}
+          addTaskInComponentTasks={(taskToAdd: ITask, isModified: boolean) =>
+            addTaskInComponentTasks(taskToAdd, isModified)
           }
         />
 
@@ -117,11 +112,10 @@ const Tasks: React.FC<any> = () => {
                   <div>
                     <TaskRow
                       taskRow={taskRow}
-                      updatedTasksCheckbox={(taskRow: ITask) =>
-                        updatedTasksCheckbox(taskRow)
-                      }
-                      deleteTaskInComponentTasks={(id: string) =>
-                        deleteTaskInComponentTasks(id)
+                      updatedTasksCheckbox={(taskRow: ITask) => updatedTasksCheckbox(taskRow)}
+                      deleteTaskInComponentTasks={(id: string) => deleteTaskInComponentTasks(id)}
+                      updateTaskRow={(isModified: boolean, taskRow: ITask) =>
+                        updateTaskRow(isModified, taskRow)
                       }
                     />
                   </div>
@@ -135,18 +129,12 @@ const Tasks: React.FC<any> = () => {
                         {`Etes-vous sûr de vouloir supprimer cette tâche : ${taskRow.title}  ?`}
                       </div>
                       <div id="validate-clear-btn">
-                        <button
-                          id="buttonannuler"
-                          onClick={() => hideModalDelete()}
-                        >
+                        <button id="buttonannuler" onClick={() => hideModalDelete()}>
                           <div id="text">
                             <div>Annuler</div>
                           </div>
                         </button>
-                        <button
-                          id="buttonsvalider"
-                          onClick={() => validateDeleteTaskInDb()}
-                        >
+                        <button id="buttonsvalider" onClick={() => validateDeleteTaskInDb()}>
                           <div id="text2">
                             <div>Valider</div>
                           </div>

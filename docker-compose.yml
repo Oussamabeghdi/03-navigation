@@ -1,8 +1,7 @@
-
-version: "3.9"
-services:
-mongodb:
-image: mongo
-ports:- "27018:27018"
-volumes:- mongo-data:/data/dbtasks
-volumes:mongo-data:
+# version: "3.9"
+# services:
+# mongodb:
+# image: mongo
+# ports:- "27018:27018"
+# volumes:- mongo-data:/data/dbtasks
+# volumes:mongo-data:

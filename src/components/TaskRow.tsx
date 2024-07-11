@@ -18,6 +18,7 @@ type Props = {
   // handleCheckTask: (id: string) => void;
   updatedTasksCheckbox: (taskRow: ITask) => void;
   setTaskRow?: React.Dispatch<React.SetStateAction<string>>;
+  updateTaskRow: (isModified: boolean, taskRow: ITask) => void;
 };
 const TaskRow: React.FC<Props> = (props: Props) => {
   const [taskRow, setTaskRow] = useState(props.taskRow);
@@ -36,6 +37,10 @@ const TaskRow: React.FC<Props> = (props: Props) => {
   //   props.handleCheckTask(taskRow._id!);
   // };
 
+  const updateTaskRow = async () => {
+    props.updateTaskRow(true, taskRow);
+  };
+
   return (
     <div style={{ width: "700px" }} className="tasks-list-container">
       <ul className="tasks-list">
@@ -53,15 +58,16 @@ const TaskRow: React.FC<Props> = (props: Props) => {
             <span className={taskRow.done ? "done" : ""}>{taskRow._id}</span>
           </div> */}
           <div className="div-in-list">
-            <span className={taskRow.done ? "done" : ""}>{taskRow.title}</span>
+            <span className={taskRow.done ? "done" : ""}>{`Titre : ${taskRow.title}`}</span>
           </div>
           <div className="div-in-list">
-            <span className={taskRow.done ? "done" : ""}>
-              {taskRow.description}
-            </span>
+            <span className={taskRow.done ? "done" : ""}>{taskRow.description}</span>
           </div>
           <div className="div-in-list-date">
-            <span className={taskRow.done ? "done" : ""}>{taskRow.date}</span>
+            <span className={taskRow.done ? "done" : ""}>{`Date: ${taskRow.date}`}</span>
+          </div>
+          <div className="div-in-list-date">
+            <span className={taskRow.done ? "done" : ""}>{`Priorité : ${taskRow.priority}`}</span>
           </div>
 
           <div className="div-in-list-trash">
@@ -73,7 +79,7 @@ const TaskRow: React.FC<Props> = (props: Props) => {
             />
           </div>
           <div className="div-in-list">
-            <button>Modifier</button>
+            <button onClick={() => updateTaskRow()}>Modifier</button>
           </div>
         </li>
       </ul>

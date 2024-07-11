@@ -65,7 +65,7 @@ export const addTask = async (task: ITask) => {
 
 // / Modifier une tâche /
 export const editTask = async (task: ITask) => {
-  const response = await fetch(urlServer + "/task" + task._id, {
+  const response = await fetch(urlServer + "/task/" + task._id, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

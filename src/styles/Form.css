@@ -37,6 +37,8 @@ textarea {
 }
 .div-input-check {
   display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .buttonsForm-tasks {
   display: flex;
@@ -56,6 +58,7 @@ textarea {
   background: #5c47d3;
   color: white;
   border-radius: 25px;
+  cursor: pointer;
 }
 .buttonsForm-tasks button:hover {
   cursor: pointer;
