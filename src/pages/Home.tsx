@@ -1,14 +1,9 @@
 import React from "react";
 import "../styles/Home.css";
 import homeLogo from "../images/3643769-building-home-house-main-menu-start_113416.png";
-import { initBrevoTracker } from "../lib/trackerbrevo";
-import { useEffect } from "react";
+
 // import Form from "../components/Form";
 const Home: React.FC = () => {
-  useEffect(() => {
-    initBrevoTracker();
-  }, []);
-
   return (
     <div className="container">
       {/* <aside className="sidebar">

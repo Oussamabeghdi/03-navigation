@@ -6,9 +6,10 @@ import Header from "./components/Header";
 import About from "./components/About";
 import Home from "./pages/Home";
 import Tasks from "./pages/Tasks";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faListAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { initBrevoTracker } from "./lib/trackerbrevo";
 library.add(faTrash, faListAlt);
 
 interface Task {
@@ -34,7 +35,9 @@ const App: React.FC = () => {
   // const handleSubmit = (event) => {
   //   event.preventDefault();
   // };
-
+  useEffect(() => {
+    initBrevoTracker();
+  }, []);
   return (
     <>
       <Router>
