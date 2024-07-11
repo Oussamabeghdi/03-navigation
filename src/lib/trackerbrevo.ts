@@ -37,3 +37,4 @@ export function initBrevoTracker() {
   iscript.parentNode?.insertBefore(n, iscript);
   window.sendinblue.page();
 }
+export {};
